@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Turn-Dial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        #counter {
+            font-size: 48px;
+            font-weight: bold;
+            color: #0066cc;
+        }
+        #input-container {
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004d99;
+        }
+    </style>
+</head>
+<body>
+    <h1>Salary Turn-Dial</h1>
+    <div id="input-container">
+        <input type="number" id="salary-input" placeholder="Enter annual salary (e.g., 50000)" step="0.01">
+        <button onclick="startCounter()">Start Counter</button>
+    </div>
+    <div id="counter">$0.00</div>
+
+    <script>
+        function startCounter() {
+            const salaryInput = document.getElementById("salary-input").value;
+            const salary = parseFloat(salaryInput);
+
+            if (isNaN(salary) || salary < 0) {
+                alert("Please enter a valid, positive salary!");
+                return;
+            }
+
+            const counterElement = document.getElementById("counter");
+            let currentPennies = 0;
+            const totalPennies = salary * 100; // Convert to pennies
+
+            counterElement.textContent = "Watch it tick up!";
+
+            // Update every 10ms (adjustable)
+            const interval = setInterval(() => {
+                if (currentPennies <= totalPennies) {
+                    const dollars = Math.floor(currentPennies / 100);
+                    const cents = currentPennies % 100;
+                    counterElement.textContent = `$${dollars}.${cents.toString().padStart(2, "0")}`;
+                    currentPennies += 1; // Increment by one penny
+                } else {
+                    clearInterval(interval);
+                    counterElement.textContent = `$${salary.toFixed(2)}`;
+                }
+            }, 10); // Speed of the counter (10ms per penny)
+        }
+    </script>
+</body>
+</html>
