@@ -1,8 +1,8 @@
 # SalaryVisualizer
 Visualize you salary in real-time penny by penny!
 
-## Getting Started
-Live Demo: https://zech-hein.github.io/SalaryVisualizer/
+## Live Demo:
+https://zech-hein.github.io/SalaryVisualizer/  
 Simply enter a salary and watch the money be earned in real-time!
 
 ## About
